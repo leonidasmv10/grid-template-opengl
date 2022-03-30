@@ -1,0 +1,1 @@
+add_library(CoreLib goodbyeclass.cpp)
