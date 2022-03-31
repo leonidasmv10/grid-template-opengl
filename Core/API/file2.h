@@ -1,0 +1,1 @@
+void function() { std::cout << "no funciona:v "; }

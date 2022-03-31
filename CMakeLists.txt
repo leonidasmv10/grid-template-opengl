@@ -1,13 +1,31 @@
 cmake_minimum_required(VERSION 3.0)
+
 SET(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+SET(T_VERSION_MAJOR 1)
+SET(T_VERSION_MINOR 0)
 
-project(Grid)
-file(GLOB_RECURSE fileCollection "Engine/*.cpp")
+project(GRID)
 
-SET(Tutorial_VERSION_MAJOR 1)
-SET(Tutorial_VERSION_MINOR 0)
+file(GLOB_RECURSE MAIN
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/*.cpp)
 
-add_subdirectory(Core)
+file(GLOB SCENE_SCRIPTS
+         RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Scene/*.cpp
+         ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Scene/*.h)
+
+source_group("Scenes" FILES ${SCENE_SCRIPTS})
+
+option(USE_CORE "Use Core" ON)
+
+if(USE_CORE)
+    add_subdirectory(Core)
+    list(APPEND EXTRA_LIBS GRID_CORE)
+    list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/Core")
+endif()
+
+# include_directories(Core/)
 
 # -- GENERAMOS EL ARCHIVO *.h EN EL QUE TENDREMOS LOS VALORES DE LAS VARIABLES
 configure_file(${PROJECT_SOURCE_DIR}/config.h.in ${PROJECT_SOURCE_DIR}/config.h)
@@ -39,8 +57,7 @@ find_library(PHYSX12_LIBRARY PhysXVehicle_static_64)
 find_library(PHYSX13_LIBRARY SceneQuery_static_64)
 find_library(PHYSX14_LIBRARY SimulationController_static_64)
 
-add_executable(${PROJECT_NAME} ${fileCollection})
-
+add_executable(${PROJECT_NAME} ${MAIN} ${SCENE_SCRIPTS})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE GLEW::GLEW)
@@ -52,8 +69,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE soil2)
 target_link_libraries(${PROJECT_NAME} PRIVATE freetype)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENVR_LIBRARY})
-
-target_link_libraries(${PROJECT_NAME} PUBLIC CoreLib)
+target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTRA_LIBS})
 
 # physx link
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PHYSX1_LIBRARY} ${PHYSX2_LIBRARY} 
@@ -61,9 +77,6 @@ ${PHYSX3_LIBRARY} ${PHYSX4_LIBRARY} ${PHYSX5_LIBRARY} ${PHYSX6_LIBRARY} ${PHYSX7
 ${PHYSX8_LIBRARY} ${PHYSX9_LIBRARY} ${PHYSX10_LIBRARY} ${PHYSX11_LIBRARY} ${PHYSX12_LIBRARY} 
 ${PHYSX13_LIBRARY} ${PHYSX14_LIBRARY})
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-                          "${PROJECT_BINARY_DIR}"
-                          "${PROJECT_SOURCE_DIR}/Core"
-                          )
+target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}" ${EXTRA_INCLUDES})
 
-# message("OUTPUT: " ${PHYSX14_LIBRARY})
+message("OUTPUT: " ${PROJECT_SOURCE_DIR}/Core)

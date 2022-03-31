@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <spdlog/spdlog.h>
 #ifndef GoodbyeLib
 #define GoodbyeLib
 
