@@ -14,17 +14,20 @@ Now configure vcpkg, a Microsoft library that allows you to add external library
 ```bash
 .\vcpkg\bootstrap-vcpkg.bat
 ```
-Now install all the libraries that make up the graphics engine with each command and description:
+Now install all the libraries that make up the graphics engine with each command and functionality:
 
-Functionality           | Library                                               | Comand vcpkg
------------------------ | ----------------------------------------------------- | -----------------
-Mesh Loading            | [assimp](https://github.com/assimp/assimp)            | .\vcpkg\vcpkg install assimp:x64-windows
-Physics                 | [physx](https://github.com/NVIDIAGameWorks/PhysX)     | .\vcpkg\vcpkg install physx:x64-windows
-OpenGL Function Loader  | [glew](https://github.com/nigels-com/glew)            | .\vcpkg\vcpkg install glew:x64-windows
-Windowing and Input     | [glfw](https://github.com/glfw/glfw)                  | .\vcpkg\vcpkg install glfw3:x64-windows
-OpenGL Mathematics      | [glm](https://github.com/g-truc/glm)                  | .\vcpkg\vcpkg install glm:x64-windows
-Texture Loading         | [stb](https://github.com/nothings/stb)                | .\vcpkg\vcpkg install stb:x64-windows
-Graphical User Interface| [imgui](https://github.com/ocornut/imgui)             | .\vcpkg\vcpkg install imgui[core,glfw-binding,opengl3-binding,docking-experimental]:x64-windows
+Functionality           | Library                                                | Comand vcpkg
+----------------------- | ------------------------------------------------------ | -----------------
+Mesh Loading            | [assimp](https://github.com/assimp/assimp)             | .\vcpkg\vcpkg install assimp:x64-windows
+Physics                 | [physx](https://github.com/NVIDIAGameWorks/PhysX)      | .\vcpkg\vcpkg install physx:x64-windows
+OpenGL Function Loader  | [glew](https://github.com/nigels-com/glew)             | .\vcpkg\vcpkg install glew:x64-windows
+Windowing and Input     | [glfw](https://github.com/glfw/glfw)                   | .\vcpkg\vcpkg install glfw3:x64-windows
+OpenGL Mathematics      | [glm](https://github.com/g-truc/glm)                   | .\vcpkg\vcpkg install glm:x64-windows
+Texture Loading         | [stb](https://github.com/nothings/stb)                 | .\vcpkg\vcpkg install stb:x64-windows
+Graphical User Interface| [imgui](https://github.com/ocornut/imgui)              | .\vcpkg\vcpkg install imgui[core,glfw-binding,opengl3-binding,docking-experimental]:x64-windows
+Gizmo Manipulate        | [imguizmo](https://github.com/CedricGuillemet/ImGuizmo)| .\vcpkg\vcpkg install imguizmo:x64-windows
+Virtual Reality         | [openvr](https://github.com/ValveSoftware/openvr)      | .\vcpkg\vcpkg install openvr:x64-windows
+Logging                 | [spdlog](https://github.com/gabime/spdlog)             | .\vcpkg\vcpkg install spdlog:x64-windows
 
 Now generate a project file or makefile for your platform. If you want to use a particular IDE, make sure it is installed; don't forget to set the Start-Up Project in Visual Studio or the Target in Xcode.
 
