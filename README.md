@@ -7,7 +7,7 @@ Grid Engine is a graphics engine developed with the OpenGL API.
 Grid has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. If you forgot, then you can `git submodule update --init` instead.
 
 ```bash
-git clone --recursive https://github.com/dev3097/grid-engine.git
+git clone --recursive https://github.com/devgrids/grid-engine.git
 ```
 Now configure vcpkg, a Microsoft library that allows you to add external library dependencies in a very simple way.
 
