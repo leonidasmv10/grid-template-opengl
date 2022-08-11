@@ -31,14 +31,14 @@ endif()
 # -- GENERAMOS EL ARCHIVO *.h EN EL QUE TENDREMOS LOS VALORES DE LAS VARIABLES
 configure_file(${PROJECT_SOURCE_DIR}/config.h.in ${PROJECT_SOURCE_DIR}/config.h)
 
+find_path(STB_INCLUDE_DIRS "stb.h")
+
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(imguizmo CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(assimp CONFIG REQUIRED)
-find_package(soil2 CONFIG REQUIRED)
-find_package(freetype CONFIG REQUIRED)
 
 find_library(OPENVR_LIBRARY openvr_api)
 
@@ -66,8 +66,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
 target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp::assimp)
-target_link_libraries(${PROJECT_NAME} PRIVATE soil2)
-target_link_libraries(${PROJECT_NAME} PRIVATE freetype)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENVR_LIBRARY})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTRA_LIBS})
@@ -79,6 +77,7 @@ ${PHYSX8_LIBRARY} ${PHYSX9_LIBRARY} ${PHYSX10_LIBRARY} ${PHYSX11_LIBRARY} ${PHYS
 ${PHYSX13_LIBRARY} ${PHYSX14_LIBRARY})
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}" ${EXTRA_INCLUDES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${STB_INCLUDE_DIRS})
 target_precompile_headers(${PROJECT_NAME} PRIVATE 
 "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/Engine/pch.h>")
 
