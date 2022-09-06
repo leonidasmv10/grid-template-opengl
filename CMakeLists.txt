@@ -4,29 +4,19 @@ SET(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 SET(GRID_VERSION_MAX 1.2)
 # string(APPEND GRID_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 
-project(GRID)
+project(grid)
 
 file(GLOB_RECURSE MAIN
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/Engine/*.cpp 
          ${CMAKE_CURRENT_SOURCE_DIR}/Engine/*.h)
 
-file(GLOB SCENE_SCRIPTS
+file(GLOB_RECURSE SCENE_SCRIPTS
          RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
          ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Scene/*.cpp
          ${CMAKE_CURRENT_SOURCE_DIR}/Engine/Scene/*.h)
 
 source_group("Scenes" FILES ${SCENE_SCRIPTS})
-
-option(USE_CORE "Use Core" ON)
-
-if(USE_CORE)
-    add_subdirectory(Core)
-    list(APPEND EXTRA_LIBS GRID_CORE)
-    list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/Core")
-endif()
-
-# include_directories(Core/)
 
 # -- GENERAMOS EL ARCHIVO *.h EN EL QUE TENDREMOS LOS VALORES DE LAS VARIABLES
 configure_file(${PROJECT_SOURCE_DIR}/config.h.in ${PROJECT_SOURCE_DIR}/config.h)
