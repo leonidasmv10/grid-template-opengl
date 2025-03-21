@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.14)
 
 SET(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 SET(GRID_VERSION_MAX 1.2)
@@ -23,6 +23,7 @@ configure_file(${PROJECT_SOURCE_DIR}/config.h.in ${PROJECT_SOURCE_DIR}/config.h)
 
 find_path(STB_INCLUDE_DIRS "stb.h")
 
+find_package(Stb REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(imgui CONFIG REQUIRED)
@@ -30,7 +31,6 @@ find_package(imguizmo CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(assimp CONFIG REQUIRED)
 
-find_library(OPENVR_LIBRARY openvr_api)
 
 # physx library
 find_library(PHYSX1_LIBRARY LowLevel_static_64)
@@ -57,7 +57,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp::assimp)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENVR_LIBRARY})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${EXTRA_LIBS})
 
 # physx link
@@ -67,7 +66,7 @@ ${PHYSX8_LIBRARY} ${PHYSX9_LIBRARY} ${PHYSX10_LIBRARY} ${PHYSX11_LIBRARY} ${PHYS
 ${PHYSX13_LIBRARY} ${PHYSX14_LIBRARY})
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_BINARY_DIR}" ${EXTRA_INCLUDES})
-target_include_directories(${PROJECT_NAME} PRIVATE ${STB_INCLUDE_DIRS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${Stb_INCLUDE_DIR})
 target_precompile_headers(${PROJECT_NAME} PRIVATE 
 "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/Engine/pch.h>")
 

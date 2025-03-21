@@ -7,11 +7,11 @@ Basic template to start programming with opengl.
 Grid has a single dependency: [cmake](http://www.cmake.org/download/), which is used to generate platform-specific makefiles or project files. Start by cloning this repository, making sure to pass the `--recursive` flag to grab all the dependencies. If you forgot, then you can `git submodule update --init` instead.
 
 ```bash
-git clone --recursive https://github.com/devgrids/grid-template-opengl.git
+git clone --recursive https://github.com/leonidasmv10/grid-template-opengl.git
 ```
 or
 ```bash
-git clone https://github.com/devgrids/grid-template-opengl.git
+git clone https://github.com/leonidasmv10/grid-template-opengl.git
 git submodule update --init --recursive
 ```
 Now configure vcpkg, a Microsoft library that allows you to add external library dependencies in a very simple way.
@@ -20,15 +20,14 @@ Now configure vcpkg, a Microsoft library that allows you to add external library
 ```
 Install the following libraries with vcpkg:
 ```bash
-.\vcpkg\vcpkg install assimp:x64-windows
-.\vcpkg\vcpkg install physx:x64-windows
-.\vcpkg\vcpkg install glew:x64-windows
 .\vcpkg\vcpkg install glfw3:x64-windows
+.\vcpkg\vcpkg install glew:x64-windows
 .\vcpkg\vcpkg install glm:x64-windows
 .\vcpkg\vcpkg install stb:x64-windows
 .\vcpkg\vcpkg install imgui[core,glfw-binding,opengl3-binding,docking-experimental]:x64-windows
 .\vcpkg\vcpkg install imguizmo:x64-windows
-.\vcpkg\vcpkg install openvr:x64-windows
+.\vcpkg\vcpkg install assimp:x64-windows
+.\vcpkg\vcpkg install physx:x64-windows
 .\vcpkg\vcpkg install spdlog:x64-windows
 ```
 
@@ -44,7 +43,6 @@ Install the following libraries with vcpkg:
  [stb](https://github.com/nothings/stb)                 | Texture Loading          |
  [imgui](https://github.com/ocornut/imgui)              | Graphical User Interface |
  [imguizmo](https://github.com/CedricGuillemet/ImGuizmo)| Gizmo Manipulate         |
- [openvr](https://github.com/ValveSoftware/openvr)      | Virtual Reality          |
  [spdlog](https://github.com/gabime/spdlog)             | Logging                  |
 
 ## Build
